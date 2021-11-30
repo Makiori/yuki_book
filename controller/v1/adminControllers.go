@@ -16,8 +16,8 @@ import (
 // @Failure 500 {object} app.Response
 // @Router con/v1/admin/register [post]
 type AdminRegisterBody struct {
-	Username string `json:"username" validate:"required"`
-	Password string `json:"password" validate:"required"`
+	PhoneNumber string `json:"phone_number" validate:"required"`
+	Password    string `json:"password" validate:"required"`
 }
 
 func AdminRegister(c *gin.Context) {
@@ -26,15 +26,15 @@ func AdminRegister(c *gin.Context) {
 	if !appG.ParseJSONRequest(&body) {
 		return
 	}
-	admin, _ := admin_model.GetAdminInfo(body.Username)
+	admin, _ := admin_model.GetAdminInfo(body.PhoneNumber)
 	if admin != nil {
-		appG.BadResponse("该账号已被注册")
+		appG.BadResponse("该电话已被注册")
 		return
 	}
-	if appG.HasError(admin_service.CreateAdmin(body.Username, body.Password)) {
+	if appG.HasError(admin_service.CreateAdmin(body.PhoneNumber, body.Password)) {
 		return
 	}
-	appG.SuccessResponse("注册成功")
+	appG.SuccessResponse("管理员账号注册成功")
 }
 
 // @Tags 管理员
@@ -45,8 +45,8 @@ func AdminRegister(c *gin.Context) {
 // @Failure 500 {object} app.Response
 // @Router con/v1/admin/login [post]
 type AdminLoginBody struct {
-	Username string `json:"username" validate:"required"`
-	Password string `json:"password" validate:"required"`
+	PhoneNumber string `json:"phone_number" validate:"required"`
+	Password    string `json:"password" validate:"required"`
 }
 
 func AdminLogin(c *gin.Context) {
@@ -55,7 +55,7 @@ func AdminLogin(c *gin.Context) {
 	if !appG.ParseJSONRequest(&body) {
 		return
 	}
-	token, err := admin_service.GenerateToken(body.Username, body.Password)
+	token, err := admin_service.GenerateToken(body.PhoneNumber, body.Password)
 	if appG.HasError(err) {
 		return
 	}
@@ -70,7 +70,7 @@ func AdminLogin(c *gin.Context) {
 // @Failure 500 {object} app.Response
 // @Router con/v1/admin/get [get]
 type AdminInfoGetBody struct {
-	Username string `json:"username" form:"username" validate:"required"`
+	PhoneNumber string `json:"phone_number" validate:"required"`
 }
 
 func AdminInfoGet(c *gin.Context) {
@@ -79,7 +79,7 @@ func AdminInfoGet(c *gin.Context) {
 	if !appG.ParseQueryRequest(&body) {
 		return
 	}
-	admin, err := admin_model.GetAdminInfoPart(body.Username)
+	admin, err := admin_model.GetAdminInfoPart(body.PhoneNumber)
 	if appG.HasError(err) {
 		return
 	}
@@ -110,7 +110,7 @@ func AdminInfoGetAll(c *gin.Context) {
 // @Failure 500 {object} app.Response
 // @Router con/v1/admin/update [post]
 type AdminPasswordUpdateBody struct {
-	Username    string `json:"username" validate:"required"`
+	PhoneNumber string `json:"phone_number" validate:"required"`
 	Password    string `json:"password" validate:"required"`
 	NewPassWord string `json:"newpassword" validate:"required"`
 }
@@ -121,12 +121,12 @@ func AdminPasswordUpdate(c *gin.Context) {
 	if !appG.ParseJSONRequest(&body) {
 		return
 	}
-	_, err := admin_model.GetAdminInfo(body.Username)
+	_, err := admin_model.GetAdminInfo(body.PhoneNumber)
 	if err != nil {
 		appG.BadResponse("未找到该管理员账号")
 		return
 	}
-	if appG.HasError(admin_service.UpdateAdminPassword(body.Username, body.Password, body.NewPassWord)) {
+	if appG.HasError(admin_service.UpdateAdminPassword(body.PhoneNumber, body.Password, body.NewPassWord)) {
 		return
 	}
 	appG.SuccessResponse("修改管理员密码成功")
@@ -140,10 +140,9 @@ func AdminPasswordUpdate(c *gin.Context) {
 // @Failure 500 {object} app.Response
 // @Router con/v1/admin/updateInfo [post]
 type AdminInfoBody struct {
-	Username         string  `json:"username" validate:"required"`
-	AdminName        *string `json:"admin_name"`
-	AdminPhonenumber *string `json:"admin_phonenumber"`
-	AdminAddress     *string `json:"admin_address"`
+	PhoneNumber  string `json:"phone_number" validate:"required"`
+	Nickname     string `json:"nickname"`
+	EmailAddress string `json:"email_address"`
 }
 
 func AdminInfoUpdate(c *gin.Context) {
@@ -152,12 +151,12 @@ func AdminInfoUpdate(c *gin.Context) {
 	if !appG.ParseJSONRequest(&body) {
 		return
 	}
-	_, err := admin_model.GetAdminInfo(body.Username)
+	_, err := admin_model.GetAdminInfo(body.PhoneNumber)
 	if err != nil {
 		appG.BadResponse("未找到该管理员账号")
 		return
 	}
-	if appG.HasError(admin_service.UpdateAdminInfo(body.Username, body.AdminName, body.AdminPhonenumber, body.AdminAddress)) {
+	if appG.HasError(admin_service.UpdateAdminInfo(body.PhoneNumber, body.Nickname, body.EmailAddress)) {
 		return
 	}
 	appG.SuccessResponse("修改管理员信息成功")
@@ -171,8 +170,8 @@ func AdminInfoUpdate(c *gin.Context) {
 // @Failure 500 {object} app.Response
 // @Router con/v1/admin/delete [post]
 type AdminDeleteBody struct {
-	Username string `json:"username" validate:"required"`
-	Password string `json:"password" validate:"required"`
+	PhoneNumber string `json:"phone_number" validate:"required"`
+	Password    string `json:"password" validate:"required"`
 }
 
 func AdminDelete(c *gin.Context) {
@@ -181,7 +180,7 @@ func AdminDelete(c *gin.Context) {
 	if !appG.ParseJSONRequest(&body) {
 		return
 	}
-	if appG.HasError(admin_service.DeleteAdmin(body.Username, body.Password)) {
+	if appG.HasError(admin_service.DeleteAdmin(body.PhoneNumber, body.Password)) {
 		return
 	}
 	appG.SuccessResponse("注销管理员成功")

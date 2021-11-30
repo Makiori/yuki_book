@@ -1,6 +1,7 @@
 package user_model
 
 import (
+	"yuki_book/model"
 	"yuki_book/model/database"
 	"yuki_book/util/logging"
 	"yuki_book/util/times"
@@ -8,18 +9,17 @@ import (
 
 // 用户表
 type User struct {
-	Id              int            `db:"id"`
-	Username        string         `db:"username"`
-	Password        string         `db:"password"`
-	Salt            string         `db:"salt"`
-	Name            *string        `db:"name"`
-	UserPhonenumber *string        `db:"user_phonenumber"`
-	UserAddress     *string        `db:"user_address"`
-	UserClass       *string        `db:"user_class"`
-	UserEmail       *string        `db:"user_Email"`
-	UserType        string         `db:"user_type"`
-	CreatedAt       times.JsonTime `db:"created_at"`
-	UpdatedAt       times.JsonTime `db:"updated_at"`
+	Id           string         `db:"id"`
+	Username     string         `db:"username"`
+	Password     string         `db:"password"`
+	Salt         string         `db:"salt"`
+	Nickname     string         `db:"Nickname"`
+	PhoneNumber  string         `db:"phone_number"`
+	Class        string         `db:"class"`
+	EmailAddress string         `db:"Email_address"`
+	UserType     int            `db:"user_type"`
+	CreatedAt    times.JsonTime `db:"created_at"`
+	UpdatedAt    times.JsonTime `db:"updated_at"`
 }
 
 //通过用户账号获取用户信息
@@ -35,11 +35,21 @@ func GetUserInfo(username string) (*User, error) {
 // 通过用户账号获取部分用户信息
 func GetUserInfoPart(username string) (*User, error) {
 	var user User
-	err := database.DBCon.Select("id, name, user_phonenumber, user_address, user_class, user_Email, user_type").Where("username = ?", username).First(&user).Error
+	err := database.DBCon.Select("id, username, nickname, phone_number, class, email_address, user_type").Where("username = ?", username).First(&user).Error
 	if err != nil {
 		return nil, err
 	}
 	return &user, nil
+}
+
+// 获取全部账号信息
+func GetAllUserInfo(page uint, pagesize uint) (data *model.PaginationQ, err error) {
+	q := model.PaginationQ{
+		Page:     page,
+		PageSize: pagesize,
+		Data:     &[]User{},
+	}
+	return q.SearchAll(database.DBCon.Model(&User{}))
 }
 
 // 注册用户账号

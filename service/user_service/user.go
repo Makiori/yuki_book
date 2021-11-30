@@ -6,6 +6,7 @@ import (
 	"yuki_book/util/sign"
 
 	"github.com/jinzhu/gorm"
+	uuid "github.com/satori/go.uuid"
 )
 
 // 生成用户token
@@ -28,14 +29,15 @@ func GenerateToken(username, password string) (interface{}, error) {
 }
 
 // 用户注册
-func CreateUser(username string, password string) error {
+func CreateUser(username string, password string, usertype int) error {
+	id := uuid.NewV4()
 	salt := "ABCDEF"
-	userType := "学生"
 	user := &user_model.User{
+		Id:       id.String(),
 		Username: username,
 		Password: sign.EncodeMD5(password + salt),
 		Salt:     salt,
-		UserType: userType,
+		UserType: usertype,
 	}
 	return user.Create()
 }
@@ -61,22 +63,21 @@ func UpdateUserPassword(username string, password string, newPassword string) er
 }
 
 // 通过用户账号修改用户信息
-func UpdateUserInfo(userName string, name *string, userPhonenumber *string, userAddress *string, userClass *string, userEmail *string) error {
+func UpdateUserInfo(username string, nickname string, phonenumber string, class string, emailaddress string) error {
 	user := user_model.User{
-		Name:            name,
-		UserPhonenumber: userPhonenumber,
-		UserClass:       userClass,
-		UserAddress:     userAddress,
-		UserEmail:       userEmail,
+		Nickname:     nickname,
+		PhoneNumber:  phonenumber,
+		Class:        class,
+		EmailAddress: emailaddress,
 	}
-	if err := user.UpdateUserInfo(userName); err != nil {
+	if err := user.UpdateUserInfo(username); err != nil {
 		return errors.BadError("修改用户信息失败")
 	}
 	return nil
 }
 
 // 管理员通过用户账号修改用户类型
-func UpdateUserType(username string, userType string) error {
+func UpdateUserType(username string, userType int) error {
 	user := user_model.User{
 		UserType: userType,
 	}
