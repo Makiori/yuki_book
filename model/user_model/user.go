@@ -49,7 +49,7 @@ func GetAllUserInfo(page uint, pagesize uint) (data *model.PaginationQ, err erro
 		PageSize: pagesize,
 		Data:     &[]User{},
 	}
-	return q.SearchAll(database.DBCon.Model(&User{}))
+	return q.SearchAll(database.DBCon.Model(&User{}).Select("id, username, nickname, phone_number, class, email_address, user_type"))
 }
 
 // 注册用户账号

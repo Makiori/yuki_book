@@ -52,7 +52,7 @@ func UserTypeNew(c *gin.Context) {
 // @Failure 500 {object} app.Response
 // @Router con/v1/userType/get [GET]
 type UserTypeGetBody struct {
-	Id int `json:"id" validate:"required"`
+	Id int `json:"id" form:"id" validate:"required"`
 }
 
 func UserTypeGet(c *gin.Context) {
@@ -125,13 +125,13 @@ func UserTypeUpdateInfo(c *gin.Context) {
 // @Failure 500 {object} app.Response
 // @Router con/v1/userType/delete [post]
 type UserTypeDeleteBody struct {
-	Id int `json:"id" validate:"required"`
+	Id int `json:"id" form:"id" validate:"required"`
 }
 
 func UserTypeDelete(c *gin.Context) {
 	appG := app.Gin{Ctx: c}
 	var body UserTypeDeleteBody
-	if !appG.ParseJSONRequest(&body) {
+	if !appG.ParseQueryRequest(&body) {
 		return
 	}
 	if appG.HasError(userType_service.DeleteUserType(body.Id)) {

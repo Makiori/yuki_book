@@ -8,11 +8,11 @@ import (
 )
 
 // 新增书本
-func CreateBook(id string, bookclassid string, shelfnum int, bookstate int, bookdamage int) error {
+func CreateBook(id string, bookclassid string, shelfid string, bookstate int, bookdamage int) error {
 	book := &book_model.Book{
 		Id:          id,
 		BookClassID: bookclassid,
-		ShelfNum:    shelfnum,
+		ShelfId:     shelfid,
 		BookState:   book_model.BookState(bookstate),
 		BookDamage:  book_model.BookDamage(bookdamage),
 	}

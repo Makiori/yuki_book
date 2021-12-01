@@ -2,6 +2,7 @@ package v1
 
 import (
 	"yuki_book/model/bookClass_model"
+	"yuki_book/model/bookShelf_model"
 	"yuki_book/model/book_model"
 	"yuki_book/service/book_service"
 	"yuki_book/util/app"
@@ -19,7 +20,7 @@ import (
 type BookNewBody struct {
 	Id          string `json:"id" validate:"required"`
 	BookClassID string `json:"book_class_id" validate:"required"`
-	ShelfNum    int    `json:"shelf_num" validate:"required"`
+	ShelfId     string `json:"shelf_id" validate:"required"`
 	BookState   int    `json:"book_state" validate:"oneof=0 1"`
 	BookDamage  int    `json:"book_damage" validate:"oneof=0 1 2 3"`
 }
@@ -40,10 +41,16 @@ func BookNew(c *gin.Context) {
 		appG.BadResponse("该书本id已经存在记录")
 		return
 	}
+	_, err2 := bookShelf_model.GetBookSelfInfo(body.ShelfId)
+	if err2 != nil {
+		appG.BadResponse("无书架")
+		return
+	}
+
 	if appG.HasError(book_service.CreateBook(
 		body.Id,
 		body.BookClassID,
-		body.ShelfNum,
+		body.ShelfId,
 		body.BookState,
 		body.BookDamage)) {
 		return
@@ -59,13 +66,13 @@ func BookNew(c *gin.Context) {
 // @Failure 500 {object} app.Response
 // @Router con/v1/book/delete [post]
 type BookDeleteBody struct {
-	Id string `json:"id" validate:"required"`
+	Id string `json:"id" form:"id" validate:"required"`
 }
 
 func BookDelete(c *gin.Context) {
 	appG := app.Gin{Ctx: c}
 	var body BookDeleteBody
-	if !appG.ParseJSONRequest(&body) {
+	if !appG.ParseQueryRequest(&body) {
 		return
 	}
 	if appG.HasError(book_service.DeleteBook(body.Id)) {
@@ -106,13 +113,13 @@ func BookGetById(c *gin.Context) {
 // @Failure 500 {object} app.Response
 // @Router con/v1/book/getById [get]
 type BookGetByClassIdBody struct {
-	BookClassID string `json:"book_class_id" validate:"required"`
+	BookClassID string `json:"book_class_id" form:"book_class_id" validate:"required"`
 }
 
 func BookGetByClassId(c *gin.Context) {
 	appG := app.Gin{Ctx: c}
 	var body BookGetByClassIdBody
-	if !appG.ParseJSONRequest(&body) {
+	if !appG.ParseQueryRequest(&body) {
 		return
 	}
 

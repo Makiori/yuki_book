@@ -30,6 +30,8 @@ func InitRouter() *gin.Engine {
 	initBookClassRouter(V1)
 	initBookRouter(V1)
 	initBookBorrowRouter(V1)
+	initReadingRoomRouter(V1)
+	initBookShelfRouter(V1)
 
 	return r
 }
@@ -104,6 +106,8 @@ func initBookClassRouter(V1 *gin.RouterGroup) {
 		bookClass.GET("/getAll", v1.BookClassGetAll)
 		// 通过id查找书集
 		bookClass.GET("/getById", v1.BookClassGetById)
+		// 模糊查询书集
+		bookClass.GET("/getLike", v1.BookClassGetLike)
 		// 管理员修改书集信息
 		bookClass.POST("/updateInfo", v1.BookClassUpdateById)
 	}
@@ -138,5 +142,29 @@ func initBookBorrowRouter(V1 *gin.RouterGroup) {
 		bookBorrow.POST("/update", v1.BookBorrowUpdate)
 		// 还书，修改借书记录
 		bookBorrow.POST("/return", v1.BookBorrowReturnUpdate)
+	}
+}
+
+func initReadingRoomRouter(V1 *gin.RouterGroup) {
+	readingRoom := V1.Group("/readingRoom")
+	{
+		readingRoom.POST("/new", v1.ReadingRoomNew)
+		readingRoom.POST("/delete", v1.ReadingRoomDelete)
+		readingRoom.POST("/update", v1.ReadingRoomUpdate)
+		readingRoom.GET("/get", v1.ReadingRoomGetById)
+		readingRoom.GET("/getLike", v1.ReadingRoomGetLike)
+		readingRoom.GET("/getAll", v1.ReadingRoomGetAll)
+	}
+}
+
+func initBookShelfRouter(V1 *gin.RouterGroup) {
+	bookShelf := V1.Group("/bookShelf")
+	{
+		bookShelf.POST("/new", v1.BookShelfNew)
+		bookShelf.POST("/delete", v1.BookShelfDelete)
+		bookShelf.POST("/update", v1.BookShelfUpdate)
+		bookShelf.GET("/get", v1.BookShelfGetById)
+		bookShelf.GET("/getLike", v1.BookShelfGetLike)
+		bookShelf.GET("/getAll", v1.BookShelfGetAll)
 	}
 }

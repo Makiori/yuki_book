@@ -70,7 +70,7 @@ func AdminLogin(c *gin.Context) {
 // @Failure 500 {object} app.Response
 // @Router con/v1/admin/get [get]
 type AdminInfoGetBody struct {
-	PhoneNumber string `json:"phone_number" validate:"required"`
+	PhoneNumber string `json:"phone_number" form:"phone_number" validate:"required"`
 }
 
 func AdminInfoGet(c *gin.Context) {

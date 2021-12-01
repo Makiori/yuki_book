@@ -61,13 +61,13 @@ func BookClassNew(c *gin.Context) {
 // @Failure 500 {object} app.Response
 // @Router con/v1/bookClass/delete [post]
 type BookClassDeleteBody struct {
-	Id string `json:"id" validate:"required"`
+	Id string `json:"id" form:"id" validate:"required"`
 }
 
 func BookClassDelete(c *gin.Context) {
 	appG := app.Gin{Ctx: c}
 	var body BookClassDeleteBody
-	if !appG.ParseJSONRequest(&body) {
+	if !appG.ParseQueryRequest(&body) {
 		return
 	}
 	if appG.HasError(bookClass_service.DeleteBookClass(body.Id)) {
@@ -104,7 +104,7 @@ func BookClassGetAll(c *gin.Context) {
 // @Failure 500 {object} app.Response
 // @Router con/v1/bookClass/getById [get]
 type BookClassGetByIdBody struct {
-	Id string `json:"id" validate:"required"`
+	Id string `json:"id" form:"id" validate:"required"`
 }
 
 func BookClassGetById(c *gin.Context) {
@@ -154,4 +154,31 @@ func BookClassUpdateById(c *gin.Context) {
 		return
 	}
 	appG.SuccessResponse("修改书集信息成功")
+}
+
+// @Tags 书集
+// @Summary 分页模糊查询书集信息
+// @Description 分页模糊查询书集信息
+// @Produce  json
+// @Success 200 {object} app.Response
+// @Failure 500 {object} app.Response
+// @Router con/v1/bookClass/getLike [get]
+
+type BookClassGetLikeBody struct {
+	FilterName string `json:"filterName" form:"filterName"`
+	Page       uint   `json:"page" form:"page"`
+	PageSize   uint   `json:"pageSize" form:"pageSize"`
+}
+
+func BookClassGetLike(c *gin.Context) {
+	appG := app.Gin{Ctx: c}
+	var body BookClassGetLikeBody
+	if !appG.ParseQueryRequest(&body) {
+		return
+	}
+	bookClass, err := bookClass_model.GetLikeBookClassInfo(body.FilterName, body.Page, body.PageSize)
+	if appG.HasError(err) {
+		return
+	}
+	appG.SuccessResponse(bookClass)
 }

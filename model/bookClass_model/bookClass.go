@@ -67,7 +67,7 @@ func UpdateBookIn(id string) error {
 	return sql.Error
 }
 
-//
+// 分页查询全部书集信息
 func GetAllbookClassInfo(page uint, pagesize uint) (data *model.PaginationQ, err error) {
 	q := model.PaginationQ{
 		Page:     page,
@@ -75,4 +75,21 @@ func GetAllbookClassInfo(page uint, pagesize uint) (data *model.PaginationQ, err
 		Data:     &[]BookClass{},
 	}
 	return q.SearchAll(database.DBCon.Model(&BookClass{}))
+}
+
+// 分页模糊查询书集信息
+func GetLikeBookClassInfo(filtername string, page uint, pagesize uint) (data *model.PaginationQ, err error) {
+	q := model.PaginationQ{
+		PageSize: pagesize,
+		Page:     page,
+		Data:     &[]BookClass{},
+	}
+	args := "%" + filtername + "%"
+	data, err = q.SearchAll(
+		database.DBCon.Model(&BookClass{}).Where("book_name like ? or book_author like ? or book_key like ? or book_edit like ? or book_introduction like ? ", args, args, args, args, args),
+	)
+	if err != nil {
+		return nil, err
+	}
+	return
 }

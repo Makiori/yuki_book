@@ -78,7 +78,7 @@ func BookBorrowNew(c *gin.Context) {
 // @Failure 500 {object} app.Response
 // @Router con/v1/bookBorrow/new [post]
 type BookBorrowGetBody struct {
-	Username string `json:"username" validate:"required"`
+	Username string `json:"username" form:"username" validate:"required"`
 }
 
 func BookBorrowGet(c *gin.Context) {

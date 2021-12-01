@@ -52,11 +52,11 @@ func (b BookDamage) String() string {
 }
 
 type Book struct {
-	Id          string         `json:"id" validate:"required"`
-	BookClassID string         `json:"book_class_id" validate:"required"`
-	ShelfNum    int            `json:"shelf_num" validate:"required"`
-	BookState   BookState      `json:"book_state" validate:"required"`
-	BookDamage  BookDamage     `json:"book_damage" validate:"required"`
+	Id          string         `db:"id"`
+	BookClassID string         `db:"book_class_id"`
+	ShelfId     string         `db:"shelf_id"`
+	BookState   BookState      `db:"book_state"`
+	BookDamage  BookDamage     `db:"book_damage"`
 	CreatedAt   times.JsonTime `db:"created_at"`
 	UpdatedAt   times.JsonTime `db:"updated_at"`
 }
