@@ -3,6 +3,7 @@ package bookShelf_model
 import (
 	"yuki_book/model"
 	"yuki_book/model/database"
+	"yuki_book/model/readingRoom_model"
 	"yuki_book/util/logging"
 	"yuki_book/util/times"
 )
@@ -70,4 +71,33 @@ func GetAllbookShelfInfo(page uint, pagesize uint) (data *model.PaginationQ, err
 		Data:     &[]BookShelf{},
 	}
 	return q.SearchAll(database.DBCon.Model(&BookShelf{}))
+}
+
+type ReadingRoomInfo struct {
+	ReadingRoomId string `db:"reading_room_id"`
+	Name          string `db:"name"`
+	Position      string `db:"postion"`
+	ShelfId       string `db:"id"`
+	Classify      string `db:"classify"`
+}
+
+func GetReadingRoomInfo(id string) (interface{}, error) {
+	var bookShelf BookShelf
+	err := database.DBCon.Where("id = ?", id).First(&bookShelf).Error
+	if err != nil {
+		return nil, err
+	}
+	var readingRoom readingRoom_model.ReadingRoom
+	err2 := database.DBCon.Where("id = ?", bookShelf.ReadingRoomId).First(&readingRoom).Error
+	if err2 != nil {
+		return nil, err2
+	}
+	readingRoomInfo := &ReadingRoomInfo{
+		ReadingRoomId: bookShelf.ReadingRoomId,
+		Name:          readingRoom.Name,
+		Position:      readingRoom.Position,
+		ShelfId:       bookShelf.Id,
+		Classify:      bookShelf.Classify,
+	}
+	return readingRoomInfo, nil
 }

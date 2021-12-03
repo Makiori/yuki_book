@@ -82,16 +82,15 @@ func initUserTypeRouter(V1 *gin.RouterGroup) {
 	userType := V1.Group("/userType")
 	{
 		// 添加用户类型
-		userType.POST("/new", v1.UserTypeNew)
+		userType.POST("/new", middleware.JWT(sign.AdminClaimsType), v1.UserTypeNew)
 		// 查看用户类型信息
 		userType.GET("/get", v1.UserTypeGet)
 		// 查看全部用户类型
 		userType.GET("/getAll", v1.UserTypeGetAll)
 		// 修改用户类型信息
-		userType.POST("/update", v1.UserTypeUpdateInfo)
+		userType.POST("/update", middleware.JWT(sign.AdminClaimsType), v1.UserTypeUpdateInfo)
 		// 删除用户类型
-		userType.POST("/delete", v1.UserTypeDelete)
-
+		userType.POST("/delete", middleware.JWT(sign.AdminClaimsType), v1.UserTypeDelete)
 	}
 }
 
@@ -99,9 +98,9 @@ func initBookClassRouter(V1 *gin.RouterGroup) {
 	bookClass := V1.Group("/bookClass")
 	{
 		// 管理员添加书集
-		bookClass.POST("/new", v1.BookClassNew)
+		bookClass.POST("/new", middleware.JWT(sign.AdminClaimsType), v1.BookClassNew)
 		// 管理员删除书集
-		bookClass.POST("/delete", v1.BookClassDelete)
+		bookClass.POST("/delete", middleware.JWT(sign.AdminClaimsType), v1.BookClassDelete)
 		// 分页展示全部书集
 		bookClass.GET("/getAll", v1.BookClassGetAll)
 		// 通过id查找书集
@@ -109,7 +108,9 @@ func initBookClassRouter(V1 *gin.RouterGroup) {
 		// 模糊查询书集
 		bookClass.GET("/getLike", v1.BookClassGetLike)
 		// 管理员修改书集信息
-		bookClass.POST("/updateInfo", v1.BookClassUpdateById)
+		bookClass.POST("/updateInfo", middleware.JWT(sign.AdminClaimsType), v1.BookClassUpdateById)
+		// 查询书集中书本的存放位置
+		// bookClass.GET("/getPosition", v1.BookClassGetPosition)
 	}
 }
 
@@ -117,17 +118,17 @@ func initBookRouter(V1 *gin.RouterGroup) {
 	book := V1.Group("/book")
 	{
 		// 管理员添加书本
-		book.POST("/new", v1.BookNew)
+		book.POST("/new", middleware.JWT(sign.AdminClaimsType), v1.BookNew)
 		// 管理员删除书本
-		book.POST("/delete", v1.BookDelete)
+		book.POST("/delete", middleware.JWT(sign.AdminClaimsType), v1.BookDelete)
 		// 通过id查找书本
 		book.GET("/getById", v1.BookGetById)
 		// 通过书集id查找书本
 		book.GET("/getByBookClassId", v1.BookGetByClassId)
 		// 管理员修改书本状态
-		book.POST("/updateBookStatu", v1.BookUpdateStatu)
+		book.POST("/updateBookStatu", middleware.JWT(sign.AdminClaimsType), v1.BookUpdateStatu)
 		// 管理员修改书本受损程度
-		book.POST("/updateBookDamage", v1.BookUpdateDamage)
+		book.POST("/updateBookDamage", middleware.JWT(sign.AdminClaimsType), v1.BookUpdateDamage)
 	}
 }
 
@@ -135,22 +136,22 @@ func initBookBorrowRouter(V1 *gin.RouterGroup) {
 	bookBorrow := V1.Group("/bookBorrow")
 	{
 		// 新建借书记录
-		bookBorrow.POST("/new", v1.BookBorrowNew)
+		bookBorrow.POST("/new", middleware.JWT(sign.UserClaimsType), v1.BookBorrowNew)
 		// 查询借书记录
-		bookBorrow.GET("/get", v1.BookBorrowGet)
+		bookBorrow.GET("/get", middleware.JWT(sign.UserClaimsType), v1.BookBorrowGet)
 		// 续借，修改借书记录
-		bookBorrow.POST("/update", v1.BookBorrowUpdate)
+		bookBorrow.POST("/update", middleware.JWT(sign.UserClaimsType), v1.BookBorrowUpdate)
 		// 还书，修改借书记录
-		bookBorrow.POST("/return", v1.BookBorrowReturnUpdate)
+		bookBorrow.POST("/return", middleware.JWT(sign.UserClaimsType), v1.BookBorrowReturnUpdate)
 	}
 }
 
 func initReadingRoomRouter(V1 *gin.RouterGroup) {
 	readingRoom := V1.Group("/readingRoom")
 	{
-		readingRoom.POST("/new", v1.ReadingRoomNew)
-		readingRoom.POST("/delete", v1.ReadingRoomDelete)
-		readingRoom.POST("/update", v1.ReadingRoomUpdate)
+		readingRoom.POST("/new", middleware.JWT(sign.AdminClaimsType), v1.ReadingRoomNew)
+		readingRoom.POST("/delete", middleware.JWT(sign.AdminClaimsType), v1.ReadingRoomDelete)
+		readingRoom.POST("/update", middleware.JWT(sign.AdminClaimsType), v1.ReadingRoomUpdate)
 		readingRoom.GET("/get", v1.ReadingRoomGetById)
 		readingRoom.GET("/getLike", v1.ReadingRoomGetLike)
 		readingRoom.GET("/getAll", v1.ReadingRoomGetAll)
@@ -160,11 +161,12 @@ func initReadingRoomRouter(V1 *gin.RouterGroup) {
 func initBookShelfRouter(V1 *gin.RouterGroup) {
 	bookShelf := V1.Group("/bookShelf")
 	{
-		bookShelf.POST("/new", v1.BookShelfNew)
-		bookShelf.POST("/delete", v1.BookShelfDelete)
-		bookShelf.POST("/update", v1.BookShelfUpdate)
+		bookShelf.POST("/new", middleware.JWT(sign.AdminClaimsType), v1.BookShelfNew)
+		bookShelf.POST("/delete", middleware.JWT(sign.AdminClaimsType), v1.BookShelfDelete)
+		bookShelf.POST("/update", middleware.JWT(sign.AdminClaimsType), v1.BookShelfUpdate)
 		bookShelf.GET("/get", v1.BookShelfGetById)
 		bookShelf.GET("/getLike", v1.BookShelfGetLike)
 		bookShelf.GET("/getAll", v1.BookShelfGetAll)
+		bookShelf.GET("/getReadingRoom", v1.BookShelfGetReadingRoomInfo)
 	}
 }

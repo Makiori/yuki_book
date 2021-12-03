@@ -23,6 +23,18 @@ type BookClass struct {
 	UpdatedAt        times.JsonTime `db:"updated_at"`
 }
 
+// 书集中书本位置
+type BookClassPosition struct {
+	Id            string `db:"id"`
+	BookName      string `db:"book_name"`
+	BookId        string `db:"id"`
+	ShelfId       string `db:"shelf_id"`
+	ReadingRoomId string `db:"reading_room_id"`
+	Classify      string `db:"classify"`
+	Name          string `db:"name"`
+	Position      string `db:"postion"`
+}
+
 // 通过id获取书集信息
 func GetBookClassInfo(id string) (*BookClass, error) {
 	var bookClass BookClass

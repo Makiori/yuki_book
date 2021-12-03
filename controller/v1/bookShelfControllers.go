@@ -184,3 +184,16 @@ func BookShelfGetAll(c *gin.Context) {
 	}
 	appG.SuccessResponse(bookShelfList)
 }
+
+func BookShelfGetReadingRoomInfo(c *gin.Context) {
+	appG := app.Gin{Ctx: c}
+	var body BookShelfGetByIdBody
+	if !appG.ParseQueryRequest(&body) {
+		return
+	}
+	info, err := bookShelf_model.GetReadingRoomInfo(body.Id)
+	if appG.HasError(err) {
+		return
+	}
+	appG.SuccessResponse(info)
+}

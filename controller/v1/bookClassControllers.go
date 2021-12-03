@@ -182,3 +182,31 @@ func BookClassGetLike(c *gin.Context) {
 	}
 	appG.SuccessResponse(bookClass)
 }
+
+// // @Tags 书集
+// // @Summary 查询书集中书本的存放位置
+// // @Description 查询书集中书本的存放位置
+// // @Produce  json
+// // @Success 200 {object} app.Response
+// // @Failure 500 {object} app.Response
+// // @Router con/v1/bookClass/getPosition [get]
+// type BookClassGetPositionBody struct {
+// 	Id       string `json:"id" form:"id" validate:"required"`
+// 	Page     uint   `json:"page" form:"page"`
+// 	PageSize uint   `json:"pageSize" form:"pageSize"`
+// }
+
+// func BookClassGetPosition(c *gin.Context) {
+// 	appG := app.Gin{Ctx: c}
+// 	var body BookClassGetPositionBody
+// 	if !appG.ParseQueryRequest(&body) {
+// 		return
+// 	}
+
+// 	positionList, err := bookClass_model.GetBookClassPosition(body.Id, body.Page, body.PageSize)
+// 	if appG.HasError(err) {
+// 		return
+// 	}
+
+// 	appG.SuccessResponse(positionList)
+// }
