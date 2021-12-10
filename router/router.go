@@ -13,7 +13,7 @@ func InitRouter() *gin.Engine {
 	//全局 Recovery 中间件从任何 panic 恢复，如果出现 panic，它会写一个 500 错误。
 	r.Use(gin.Recovery())
 	//全局 日志中间件
-	//r.Use(middleware.LoggerToFile())
+	r.Use(middleware.LoggerToFile())
 	//全局 跨域中间件
 	r.Use(middleware.Cors())
 	//加载模板文件
