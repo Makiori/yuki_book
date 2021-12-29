@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="cdcff210-1b1f-4881-bb5f-ec048d4ba8b9" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/docs/all.sql" beforeDir="false" afterPath="$PROJECT_DIR$/docs/all.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/yuki_book.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/yuki_book.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/v1/adminControllers.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/v1/adminControllers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/v1/bookClassControllers.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/v1/bookClassControllers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/v1/bookShelfControllers.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/v1/bookShelfControllers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/v1/readingRoomControllers.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/v1/readingRoomControllers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/v1/userControllers.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/v1/userControllers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/v1/userTypeControllers.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/v1/userTypeControllers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/all.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/router.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="GOROOT" url="file://C:/Program Files/Go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -27,8 +44,46 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.formatter.settings.were.checked" value="true" />
     <property name="go.import.settings.migrated" value="true" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="yuki_book" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/main.go" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="SwaggerCodegen">
+      <option name="activeConfigurationType" value="FILE" />
+      <option name="configurationPath" value="" />
+      <option name="customJreEnabled" value="false" />
+      <option name="customTemplatesPath" value="" />
+      <option name="enableDebugLogging" value="false" />
+      <option name="generateToPath" value="D:\study\goword\yuki_book\gen" />
+      <option name="generationParameters">
+        <list />
+      </option>
+      <option name="generatorPath" value="https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/5.0.0/openapi-generator-cli-5.0.0.jar" />
+      <option name="jdkPath" value="" />
+      <option name="language" value="java" />
+      <option name="specificationPath" value="D:\study\goword\yuki_book\docs\swagger.yaml" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go 构建.go build main.go" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -39,6 +94,8 @@
       <option name="presentableId" value="Default" />
       <updated>1637566471039</updated>
       <workItem from="1637566472894" duration="6000" />
+      <workItem from="1639387054526" duration="1758000" />
+      <workItem from="1639389030110" duration="6000" />
     </task>
     <servers />
   </component>

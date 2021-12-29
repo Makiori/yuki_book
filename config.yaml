@@ -8,7 +8,7 @@ server:
   # 日志是否需要记录 true or false
   log: false
   # 端口
-  httpPort: 9000
+  httpPort: 9001
   # 超时时间/单位s
   readTimeout: 60
   writeTimeout: 60

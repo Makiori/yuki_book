@@ -1,0 +1,12 @@
+info:
+  contact: {}
+  description: 借书系统
+  title: yuki_book
+  version: "1.0"
+paths: {}
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

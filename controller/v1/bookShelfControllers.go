@@ -165,13 +165,7 @@ func BookShelfGetLike(c *gin.Context) {
 	appG.SuccessResponse(bookShelf)
 }
 
-// @Tags 书架
-// @Summary 分页查询全部书架记录
-// @Description 分页查询全部书架记录
-// @Produce  json
-// @Success 200 {object} app.Response
-// @Failure 500 {object} app.Response
-// @Router con/v1/bookShelf/getAll [get]
+
 func BookShelfGetAll(c *gin.Context) {
 	appG := app.Gin{Ctx: c}
 	var body controller.PaginationQueryBody

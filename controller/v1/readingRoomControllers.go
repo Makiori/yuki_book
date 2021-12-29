@@ -127,7 +127,6 @@ func ReadingRoomGetById(c *gin.Context) {
 // @Success 200 {object} app.Response
 // @Failure 500 {object} app.Response
 // @Router con/v1/readingRoom/getLike [get]
-
 type ReadingRoomGetLikeBody struct {
 	FilterName string `json:"filterName" form:"filterName"`
 	Page       uint   `json:"page" form:"page"`
@@ -147,13 +146,7 @@ func ReadingRoomGetLike(c *gin.Context) {
 	appG.SuccessResponse(readingRoom)
 }
 
-// @Tags 阅览室
-// @Summary 分页查询全部阅览室记录
-// @Description 分页查询全部阅览室记录
-// @Produce  json
-// @Success 200 {object} app.Response
-// @Failure 500 {object} app.Response
-// @Router con/v1/readingRoom/getAll [get]
+
 func ReadingRoomGetAll(c *gin.Context) {
 	appG := app.Gin{Ctx: c}
 	var body controller.PaginationQueryBody

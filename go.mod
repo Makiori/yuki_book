@@ -21,8 +21,8 @@ require (
 	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/pkg/errors v0.9.1
 	github.com/ugorji/go/codec v1.1.7 // indirect
-	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5 // indirect
-	golang.org/x/sys v0.0.0-20210823070655-63515b42dcdf // indirect
+	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
+	golang.org/x/sys v0.0.0-20211007075335-d3039528d8ac // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 
@@ -41,8 +41,8 @@ require (
 	github.com/richardlehane/msoleps v1.0.1 // indirect
 	github.com/spf13/viper v1.9.0
 	github.com/xuri/efp v0.0.0-20210322160811-ab561f5b45e3 // indirect
-	golang.org/x/net v0.0.0-20210726213435-c6fcb2dbf985 // indirect
-	golang.org/x/text v0.3.6 // indirect
+	golang.org/x/net v0.0.0-20211008194852-3b03d305991f // indirect
+	golang.org/x/text v0.3.7 // indirect
 )
 
 require (
@@ -72,13 +72,13 @@ require (
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
 	github.com/chromedp/cdproto v0.0.0-20211112223831-e508c7bf6446
 	github.com/go-openapi/jsonpointer v0.19.5 // indirect
-	github.com/go-openapi/jsonreference v0.19.5 // indirect
-	github.com/go-openapi/spec v0.20.3 // indirect
-	github.com/go-openapi/swag v0.19.14 // indirect
+	github.com/go-openapi/jsonreference v0.19.6 // indirect
+	github.com/go-openapi/spec v0.20.4 // indirect
+	github.com/go-openapi/swag v0.19.15 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
-	github.com/swaggo/swag v1.7.4 // indirect
-	golang.org/x/tools v0.1.5 // indirect
+	github.com/swaggo/swag v1.7.6 // indirect
+	golang.org/x/tools v0.1.7 // indirect
 )
 
 require (
@@ -86,4 +86,12 @@ require (
 	github.com/jinzhu/gorm v1.9.16
 )
 
-require github.com/jinzhu/inflection v1.0.0 // indirect
+require (
+	github.com/cpuguy83/go-md2man/v2 v2.0.1 // indirect
+	github.com/ghodss/yaml v1.0.0 // indirect
+	github.com/go-swagger/go-swagger v0.28.0 // indirect
+	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/russross/blackfriday/v2 v2.1.0 // indirect
+	github.com/shurcooL/sanitized_anchor_name v1.0.0 // indirect
+	github.com/urfave/cli/v2 v2.3.0 // indirect
+)

@@ -12,6 +12,8 @@ import (
 // @Summary 管理员注册
 // @Description 管理员注册
 // @Produce  json
+// @Security ApiKeyAuth
+// @Param data body AdminUpdateBody true "账号，密码"
 // @Success 200 {object} app.Response
 // @Failure 500 {object} app.Response
 // @Router con/v1/admin/register [post]
@@ -86,13 +88,7 @@ func AdminInfoGet(c *gin.Context) {
 	appG.SuccessResponse(admin)
 }
 
-// @Tags 管理员
-// @Summary 获取全部管理员消息
-// @Description 获取全部管理员消息
-// @Produce  json
-// @Success 200 {object} app.Response
-// @Failure 500 {object} app.Response
-// @Router con/v1/admin/getAll [get]
+
 func AdminInfoGetAll(c *gin.Context) {
 	appG := app.Gin{Ctx: c}
 	adminList, err := admin_model.GetAllAdminInfo()

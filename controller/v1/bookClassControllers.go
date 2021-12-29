@@ -76,13 +76,7 @@ func BookClassDelete(c *gin.Context) {
 	appG.SuccessResponse("删除书集成功")
 }
 
-// @Tags 书集
-// @Summary 分页展示全部书集信息
-// @Description 分页展示全部书集信息
-// @Produce  json
-// @Success 200 {object} app.Response
-// @Failure 500 {object} app.Response
-// @Router con/v1/bookClass/getAll [get]
+
 func BookClassGetAll(c *gin.Context) {
 	appG := app.Gin{Ctx: c}
 	var body controller.PaginationQueryBody

@@ -91,13 +91,7 @@ func UserInfoGet(c *gin.Context) {
 	appG.SuccessResponse(user)
 }
 
-// @Tags 用户
-// @Summary 管理员获取全部用户信息
-// @Description 管理员获取全部用户信息
-// @Produce  json
-// @Success 200 {object} app.Response
-// @Failure 500 {object} app.Response
-// @Router con/v1/user/getAll [GET]
+
 func UserInfoGetAll(c *gin.Context) {
 	appG := app.Gin{Ctx: c}
 	var body controller.PaginationQueryBody

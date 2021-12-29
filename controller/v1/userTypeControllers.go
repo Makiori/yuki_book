@@ -68,13 +68,6 @@ func UserTypeGet(c *gin.Context) {
 	appG.SuccessResponse(userType)
 }
 
-// @Tags 用户类型
-// @Summary 查看用户类型信息
-// @Description 查看用户类型信息
-// @Produce  json
-// @Success 200 {object} app.Response
-// @Failure 500 {object} app.Response
-// @Router con/v1/userType/getAll [GET]
 func UserTypeGetAll(c *gin.Context) {
 	appG := app.Gin{Ctx: c}
 	userTypeList, err := userType_model.GetAllUserTypeInfo()

@@ -24,6 +24,12 @@ func init() {
 	model.Init()
 }
 
+// @title yuki_book
+// @version 1.0
+// @description 借书系统
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
 func main() {
 	logging.Info("设置服务器时区为东八区")
 	timeLocal := time.FixedZone("CST", 8*3600)
